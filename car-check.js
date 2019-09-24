@@ -1,5 +1,4 @@
-jQuery = window.jQuery;
-
+'use strict';
 function preload(selector, fnc) {
   let values;
   try {
@@ -7,13 +6,16 @@ function preload(selector, fnc) {
   values = [...values.querySelectorAll('option')];
   values = values.map(op => op.value);
   } catch(e) {
-  console.info('error in parsing values', e)
+  // console.info('error in parsing values', e)
   };
-  return fnc?fnc(values):values;
+  return fnc&&values?fnc(values):values;
 }
 
+let api;
+
 window.load = (ev) => {
-  window.formSubmit = jQuery._data(jQuery('form.car-compatibility-form').get(0), "events").submit[0].handler;
+  const jQuery = window.jQuery;
+  // window.formSubmit = jQuery._data(jQuery('form.car-compatibility-form').get(0), "events").submit[0].handler;
   ev.preventDefault && ev.preventDefault();
   new Vue({
     el: '.car-compatibility-form',
